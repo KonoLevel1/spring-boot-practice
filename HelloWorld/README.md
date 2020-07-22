@@ -8,3 +8,10 @@
 * http://localhost:8080/ にアクセスするとHelloWorld!を表示する
 
 # アノテーション
+
+## @RestController
+* リクエストを受け付けるコントローラークラスに付与する
+## @EnableAutoConfiguration
+* Spring Bootの様々な設定を自動的に有効にする（様々なが具体的に何なのか調査中）
+## @RequestMapping("/")
+* マッピングするURLの接頭辞を設定
