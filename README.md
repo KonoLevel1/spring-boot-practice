@@ -10,5 +10,5 @@ Java開発では、VSCodeは役に立たないので、Intellijかeclipseを利�
 
 * SpringBootCLIインストール
 
-$ brew tap pivotal/tap
+$ brew tap pivotal/tap<br>
 $ brew install springboot
