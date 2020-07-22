@@ -7,13 +7,14 @@
     <groupId>org.example</groupId>
     <artifactId>HelloWorld</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <!-- 親？ -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.1.RELEASE</version>
     </parent>
 
+    <!-- 依存関係を設定 -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -21,6 +22,7 @@
         </dependency>
     </dependencies>
 
+    <!-- 実行可能なjarを作成するために追加 -->
     <build>
         <plugins>
             <plugin>
@@ -30,10 +32,13 @@
         </plugins>
     </build>
 
+    <!-- 説明項目 -->
     <description/>
+    <!-- 開発者 -->
     <developers>
         <developer/>
     </developers>
+    <!-- ライセンス -->
     <licenses>
         <license/>
     </licenses>
