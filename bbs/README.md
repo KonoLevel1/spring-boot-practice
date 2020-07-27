@@ -7,3 +7,11 @@
 3. 2の内容を掲示板として表示する
 4. 使う技術：Spring Boot, MySQL, jOOQ, Thymeleaf, Gradle
 
+* jOOQ(ジューク)
+
+    * Javaプログラム内でSQLをより使いやすくする
+    * ORMとしての機能も充実
+
+* Thymeleaf（タイムリーフ）
+
+    * テンプレートエンジン
