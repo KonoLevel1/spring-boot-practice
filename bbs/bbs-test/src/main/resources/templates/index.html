@@ -19,10 +19,10 @@
     <h2>過去の書き込み</h2>
     <table th:each="message: ${messages}">
        <tr>
-           <th><string th:text="${message.name}"></string></th>
+           <th align="left"><string th:text="${message.name}"></string></th>
        </tr>
         <tr>
-            <td><p th:text="${message.text}"></p></td>
+            <td align="left"><p th:text="${message.text}"></p></td>
         </tr>
     </table>
 
