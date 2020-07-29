@@ -16,19 +16,15 @@ repositories {
 
 dependencies {
 	// SpringBootによって管理される依存関係ライブラリ 実装
-
-	compile group: 'org.jooq', name: 'jooq', version: '3.11.11'
-	compile group: 'org.jooq', name: 'jooq-codegen', version: '3.11.11'
-	compile group: 'org.jooq', name: 'jooq-meta', version: '3.11.11'
-	compile 'mysql:mysql-connector-java:5.1.21'
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.jooq:jooq' // JOOQ導入
 	runtimeOnly 'mysql:mysql-connector-java'
-	compile ('mysql:mysql-connector-java')// MySQL Driver
+	// compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+	//runtime "mysql:mysql-connector-java:8.0.15"
+	jooqRuntime "mysql:mysql-connector-java:8.0.15"
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -40,64 +36,62 @@ dependencies {
 
 jooq {
 
-		version = '3.13.1' // JOOQのバージョン指定
-		edition = 'OSS' // エディションの指定（無料版）
-		generateSchemaSourceOnCompilation = true // コンパイル時にスキーマソースを生成する
-		sample(sourceSets.main) {
+	version = '3.13.1' // JOOQのバージョン指定
+	edition = 'OSS' // エディションの指定（無料版）
+	generateSchemaSourceOnCompilation = true // コンパイル時にスキーマソースを生成する
+	sample(sourceSets.main) {
 
-			jdbc {
-				driver = 'com.mysql.cj.jdbc.Driver' // データベースドライバのクラス名
-				url = 'jdbc:mysql://${MYSQL_HOST:localhost}:3306/bbs_test?serverTimezone=JST' // SQLに接続するためのURL
-				user = 'keiziban' // データベースにログインするためのユーザー名
-				password = 'secret' // データベースにログインするためのパスワード
-				properties {
-					property {
-						key = 'ssl'
-						value = 'false'
-					}
-				}
-			}
-			generator {
-				name = 'org.jooq.codegen.DefaultGenerator'
-				strategy {
-					name = 'org.jooq.codegen.DefaultGeneratorStrategy'
-					// ...
-				}
-				database {
-					name = 'org.jooq.meta.mysql.MySQLDatabase' // 対象とするデータベース
-					inputSchema = 'bbs_test' // データベース名
-					forcedTypes {
-						forcedType {
-							name = 'varchar'
-							expression = '.*'
-							types = 'JSONB?'
-						}
-						forcedType {
-							name = 'varchar'
-							expression = '.*'
-							types = 'INET'
-						}
-					}
-					// ...
-				}
-				generate {
-					relations = true
-					deprecated = false
-					records = true
-					immutablePojos = true
-					fluentSetters = true
-					// ...
-				}
-				target {
-					packageName = 'nu.studer.sample' // 生成されるコードのパッケージ名
-					directory = 'src/main/java' // 生成されるコードを配置するディレクトリ
+		jdbc {
+			driver = 'com.mysql.cj.jdbc.Driver' // データベースドライバのクラス名
+			url = 'jdbc:mysql://localhost:3306/bbs_test?serverTimezone=JST' // SQLに接続するためのURL
+			user = 'keiziban' // データベースにログインするためのユーザー名
+			password = 'secret' // データベースにログインするためのパスワード
+			properties {
+				property {
+					key = 'ssl'
+					value = 'false'
 				}
 			}
 		}
+		generator {
+			name = 'org.jooq.codegen.DefaultGenerator'
+			strategy {
+				name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+				// ...
+			}
+			database {
+				name = 'org.jooq.meta.mysql.MySQLDatabase' // 対象とするデータベース
+				inputSchema = 'bbs_test' // データベース名
+				forcedTypes {
+					forcedType {
+						name = 'varchar'
+						expression = '.*'
+						types = 'JSONB?'
+					}
+					forcedType {
+						name = 'varchar'
+						expression = '.*'
+						types = 'INET'
+					}
+				}
+				// ...
+			}
+			generate {
+				relations = true
+				deprecated = false
+				records = true
+				immutablePojos = true
+				fluentSetters = true
+				// ...
+			}
+			target {
+				packageName = 'nu.studer.sample' // 生成されるコードのパッケージ名
+				directory = 'src/main/java' // 生成されるコードを配置するディレクトリ
+			}
+		}
 	}
+}
 
-	test {
-		useJUnitPlatform()
-	}
-
-
+test {
+	useJUnitPlatform()
+}
