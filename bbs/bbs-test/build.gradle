@@ -40,7 +40,7 @@ jooq {
 	version = '3.13.1' // JOOQのバージョン指定
 	edition = 'OSS' // エディションの指定（無料版）
 	generateSchemaSourceOnCompilation = true // コンパイル時にスキーマソースを生成する
-	sample(sourceSets.main) {
+	bbs(sourceSets.main) {
 
 		jdbc {
 			driver = 'com.mysql.cj.jdbc.Driver' // データベースドライバのクラス名
@@ -95,13 +95,4 @@ jooq {
 
 test {
 	useJUnitPlatform()
-}
-task copyJooq(dependsOn: [clean, generateTablesJooqSchemaSource]) {
-	doLast {
-		File targetDir = new File("src/main/java/box/white/seriwb/api/jooq")
-		targetDir.deleteDir()
-
-		File jooqDir = new File("build/generated-src/jooq/tables")
-		GFileUtils.copyDirectory(jooqDir, new File("src/main/java"))
-	}
 }
