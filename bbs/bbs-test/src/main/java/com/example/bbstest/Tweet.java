@@ -7,7 +7,7 @@ package com.example.bbstest;
         import javax.persistence.Table;
 
 @Entity
-@Table("bbs_test")
+@Table(name="tweet")
 public class Tweet {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
